@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hletong.dao.IUserDao">
+	<resultMap type="com.hletong.dao.dto.UserDto" id="User">
+		<id property="id" column="id"/>
+		<result property="userName" column="user_name"/>
+		<result property="password" column="password"/>
+		<result property="age" column="age"/>
+	</resultMap>
+	
+	<select id="queryUserTest" resultMap="User" parameterType="com.hletong.dao.dto.UserDto" >
+		select 
+			id,
+			user_name,
+			password,
+			age 
+			from user_test
+		<where>
+			 <if test="id != null and id != ''">and id = #{id, jdbcType=INTEGER}</if>
+			 <if test="userName != null and userName != ''">and user_name = #{userName,jdbcType=VARCHAR}</if>
+			 <if test="age != null and age != ''">and age = #{age ,jdbcType=INTEGER}</if>
+		</where>
+	</select>
+	
+	<select id="getUserDtoByName" resultMap="User" parameterType="java.util.Map" >
+		select 
+			id,
+			user_name,
+			password,
+			age 
+			from user_test
+			where password = #{password} and user_name = #{userName}
+	</select>
+	
+	<select id="countTest" resultType="int" parameterType="com.hletong.dao.dto.UserDto">
+		select 
+		count(*)
+			from user_test
+		<where>
+			 <if test="id != null">and id = #{id}</if>
+			 <if test="userName != null">and user_name = #{userName}</if>
+			 <if test="age != null">and age = #{age}</if>
+		</where>
+	</select>
+	
+	<insert id="insertTest" parameterType="com.hletong.dao.dto.UserDto">
+		insert into user_test
+		(user_name, password, age)
+		values
+		(#{userName}, #{password}, #{age})
+	</insert>
+	
+	<update id="updateTest" parameterType="com.hletong.dao.dto.UserDto">
+		update user_test set user_name = #{user_name}, password = #{password}, age = #{age}
+		where id = #{id}
+	</update>
+	
+	<delete id="deleteTest" parameterType="String">
+		delete from user_test where user_name = #{userName} 
+	</delete>
+</mapper>
