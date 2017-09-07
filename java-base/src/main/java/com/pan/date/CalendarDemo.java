@@ -34,7 +34,7 @@ public class CalendarDemo {
 		DateTime dateTime2 = new DateTime().withDate(1985, 11, 24).withTime(12, 12, 00, 00);
 		System.out.println(dateTime2.toString());
 		System.out.println(date.getEra());
-		
-		
+
+		System.out.println(newDt.toString());
 	}
 }
