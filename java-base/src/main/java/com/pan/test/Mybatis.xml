@@ -1,0 +1,8 @@
+<choose>
+	<when test='condition1 == "2" and condition2 == "3"'>
+		<include refid="sql1"></include>
+	</when>
+	<when test='condition3 == "4"'>
+		<include refid="sql2"></include>
+	</when>
+</choose>
